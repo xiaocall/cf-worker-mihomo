@@ -1,6 +1,7 @@
 import { getmihomo_config } from './mihomo.js';
 import { getsingbox_config } from './singbox.js';
-import { getFakePage } from './html.js';
+import { getv2ray_config } from './v2ray.js';
+import { getFakePage } from './page.js';
 import * as utils from './utils.js';
 export default {
     async fetch(request, env) {
@@ -12,9 +13,11 @@ export default {
             rule: url.searchParams.get('template'),
             singbox: url.searchParams.get('singbox') === 'true',
             mihomo: url.searchParams.get('mihomo') === 'true',
+            v2ray: url.searchParams.get('v2ray') === 'true',
             udp: url.searchParams.get('udp') === 'true',
             exclude_package: url.searchParams.get('ep') === 'true',
             exclude_address: url.searchParams.get('ea') === 'true',
+            tailscale: url.searchParams.get('tailscale') === 'true',
             IMG: env.IMG || utils.backimg,
             sub: env.SUB || utils.subapi,
             Mihomo_default: env.MIHOMOTOP || utils.mihomo_top,
@@ -23,7 +26,8 @@ export default {
             singbox_1_12_alpha: env.SINGBOX_1_12_ALPHA || utils.singbox_1_12_alpha,
             beian: env.BEIAN || utils.beiantext,
             beianurl: env.BEIANURL || utils.beiandizi,
-            configs: utils.configs(env.MIHOMO, env.SINGBOX)
+            configs: utils.configs(env.MIHOMO, env.SINGBOX),
+            modes: utils.modes(env.SUB || utils.subapi, request.headers.get('User-Agent'))
         }
 
         if (e.urls.length === 1 && e.urls[0].includes(',')) {
@@ -42,8 +46,10 @@ export default {
             let res, headers, status;
             if (e.singbox) {
                 res = await getsingbox_config(e);
-            } else {
+            } else if (e.mihomo) {
                 res = await getmihomo_config(e);
+            } else if (e.v2ray) {
+                res = await getv2ray_config(e);
             }
             const responseHeaders = res.headers;
             headers = new Headers(responseHeaders);
