@@ -1,12 +1,12 @@
 {
 	"name": "cf-worker-mihomo",
-	"version": "1.2.0",
+	"version": "1.2.2",
 	"private": true,
 	"license": "MIT",
 	"scripts": {
 		"deploy:workers": "wrangler deploy",
 		"deploy": "vercel --prod",
-		"dev:workers": "wrangler dev",
+		"dev:workers": "wrangler dev src/_worker.js --live-reload",
 		"dev": "vercel dev",
 		"build": "node esbuild.js",
 		"start:workers": "wrangler dev",

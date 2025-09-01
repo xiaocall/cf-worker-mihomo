@@ -1,3 +1,5 @@
+import CSS from './css.js';
+
 export async function getFakePage(e) {
     return `
 <!DOCTYPE html>
@@ -6,403 +8,9 @@ export async function getFakePage(e) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20id='Partition-Auto--Streamline-Carbon'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%20height='16'%20width='16'%3E%3Cdesc%3EPartition%20Auto%20Streamline%20Icon%3A%20https%3A//streamlinehq.com%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cpath%20d='M13%209.5c-1.1028%200%20-2%200.8972%20-2%202%200%200.3418%200.0941%200.6587%200.24585%200.94045C10.30775%2013.12675%209.17285%2013.5%208%2013.5%204.9673%2013.5%202.5%2011.0327%202.5%208H1.5c0%203.584%202.9159%206.5%206.5%206.5%201.42275%200%202.79615%20-0.468%203.92165%20-1.3208C12.2334%2013.38015%2012.6023%2013.5%2013%2013.5c1.1028%200%202%20-0.8972%202%20-2s-0.8972%20-2%20-2%20-2Zm0%203c-0.5514%200%20-1%20-0.44875%20-1%20-1s0.4486%20-1%201%20-1%201%200.44875%201%201%20-0.4486%201%20-1%201Z'%20fill='%23000000'%20stroke-width='0.5'/%3E%3Cpath%20d='M8%201.5c-1.42275%200%20-2.79615%200.468%20-3.92165%201.3208C3.7666%202.61985%203.3977%202.5%203%202.5%201.8972%202.5%201%203.3972%201%204.5s0.8972%202%202%202%202%20-0.8972%202%20-2c0%20-0.3418%20-0.0941%20-0.6587%20-0.24585%20-0.94045C5.69225%202.87325%206.82715%202.5%208%202.5c3.0327%200%205.5%202.4673%205.5%205.5h1c0%20-3.584%20-2.9159%20-6.5%20-6.5%20-6.5ZM3%205.5c-0.5514%200%20-1%20-0.44875%20-1%20-1s0.4486%20-1%201%20-1%201%200.44875%201%201%20-0.4486%201%20-1%201Z'%20fill='%23000000'%20stroke-width='0.5'/%3E%3Cpath%20id='_Transparent_Rectangle_'%20d='M0%200h16v16H0Z'%20fill='none'%20stroke-width='0.5'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Kwisma/cf-worker-mihomo@main/favicon.png">
     <title>配置转换工具</title>
-    <style>
-        :root {
-            --primary-color: #4361ee;
-            --hover-color: #3b4fd3;
-            --bg-color: #f5f6fa;
-            --card-bg: #ffffff;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-image: url(${e.IMG});
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: var(--bg-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 60px 0;
-            align-items: center;
-        }
-
-        .container {
-            position: relative;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            max-width: 600px;
-            margin: 0;
-            width: 90%;
-            height: 90%;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .link-input {
-            flex: 1;
-            min-width: 0;
-            margin-top: 0;
-            padding: 12px;
-            border: 2px solid rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
-        }
-
-        .link-row {
-            display: flex;
-            align-items: center;
-            position: relative;
-            margin-bottom: 8px;
-            gap: 10px;
-        }
-
-        .add-btn {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            background-color: #f8f9fa;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .add-btn:hover {
-            background-color: #ddd;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 500;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15),
-                inset 0 2px 4px rgba(0, 0, 0, 0.03);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
-        }
-
-        button:hover {
-            background-color: var(--hover-color);
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        #result {
-            background-color: #f8f9fa;
-            font-family: monospace;
-            word-break: break-all;
-        }
-
-        .github-corner svg {
-            fill: var(--primary-color);
-            color: var(--card-bg);
-            position: absolute;
-            top: 0;
-            right: 0;
-            border: 0;
-            width: 80px;
-            height: 80px;
-        }
-
-        .github-corner:hover .octo-arm {
-            animation: octocat-wave 560ms ease-in-out;
-        }
-
-        @keyframes octocat-wave {
-            0%, 100% { transform: rotate(0); }
-            20%, 60% { transform: rotate(-25deg); }
-            40%, 80% { transform: rotate(10deg); }
-        }
-
-        .logo-title {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .beian-info {
-            text-align: center;
-            font-size: 13px;
-        }
-
-        .beian-info a {
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px dashed var(--primary-color);
-            padding-bottom: 2px;
-        }
-
-        .beian-info a:hover {
-            border-bottom-style: solid;
-        }
-
-        #qrcode {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        
-        .template-selector {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-        
-        .template-toggle {
-            padding: 12px 15px;
-            background-color: rgba(67, 97, 238, 0.1);
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.2s;
-        }
-        
-        .template-toggle:hover {
-            background-color: rgba(67, 97, 238, 0.2);
-        }
-        
-        .template-toggle:after {
-            content: "▶";
-            font-size: 12px;
-            transition: transform 0.3s;
-            margin-left: 8px;
-        }
-        
-        .template-toggle.collapsed:after {
-            transform: rotate(90deg);
-        }
-        
-        .template-options {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            background-color: white;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            display: none;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .template-options.show {
-            display: block;
-        }
-        
-        .template-option {
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .template-option:last-child {
-            border-bottom: none;
-        }
-        
-        .template-option:hover {
-            background-color: rgba(67, 97, 238, 0.1);
-        }
-        
-        .template-option.selected {
-            background-color: rgba(67, 97, 238, 0.2);
-            font-weight: bold;
-        }
-
-        .config-toggle {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            background: rgba(67, 97, 238, 0.1);
-            border-radius: 10px;
-            padding: 8px;
-        }
-
-        .toggle-option {
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            text-align: center;
-            flex: 1;
-        }
-
-        .toggle-option.active {
-            background-color: #4361ee;
-            color: white;
-        }
-
-        .toggle-option:not(.active):hover {
-            background-color: rgba(67, 97, 238, 0.2);
-        }
-
-        .mode-options {
-            display: none;
-        }
-
-        .mode-options.active {
-            display: block;
-        }
-
-        .tip-icon {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background-color: #4a60ea;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .tip-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tip-panel {
-            display: none;
-            position: absolute;
-            top: 24px;
-            left: 0;
-            min-width: 260px;
-            max-width: 320px;
-            max-height: 50vh;
-            background: white;
-            color: #333;
-            font-size: 14px;
-            border-radius: 8px;
-            padding: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 999;
-            white-space: normal;
-            line-height: 1.6;
-            overflow-y: auto;
-            overflow-x: hidden;
-            word-break: break-word;
-        }
-
-        .tip-panel ul {
-            margin: 8px 0;
-            padding-left: 20px;
-            list-style-type: disc;
-        }
-
-        .tip-panel li {
-            margin-bottom: 6px;
-        }
-
-        .tip-panel strong, .tip-panel b {
-            font-weight: bold;
-            color: #4a60ea;
-            display: block;
-            margin-top: 10px;
-        }
-
-        .tip-wrapper.active .tip-panel {
-            display: block;
-        }
-
-        .protocol-options {
-            display: flex;
-            gap: 15px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-
-        .protocol-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .protocol-checkbox input {
-            width: auto;
-            margin: 0;
-        }
-
-    </style>
+    <style>${CSS(e)}</style>
     <script src="https://cdn.jsdelivr.net/npm/@keeex/qrcodejs-kx@1.0.2/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.5/dist/purify.min.js"></script>
@@ -580,7 +188,7 @@ export async function getFakePage(e) {
             if (h1Element) {
                 h1Element.textContent = modeName ? \`\${modeName}配置转换工具\` : '配置转换工具';
             }
-            
+            updateResult('');
             activeMode = modeId;
         }
 
@@ -805,17 +413,29 @@ export async function getFakePage(e) {
             
             // 生成二维码
             const qrcodeDiv = document.getElementById('qrcode');
-            qrcodeDiv.innerHTML = '';
-            new QRCode(qrcodeDiv, {
-                text: urlLink,
-                width: 220,
-                height: 220,
-                colorDark: "#4a60ea",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.L,
-                scale: 1
-            });
+            
+            if (urlLink) {
+                // 有内容时显示二维码
+                qrcodeDiv.classList.add('show');
+                qrcodeDiv.innerHTML = '';
+                new QRCode(qrcodeDiv, {
+                    text: urlLink,
+                    width: 220,
+                    height: 220,
+                    colorDark: "#4a60ea",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.L,
+                    scale: 1
+                });
+            } else {
+                // 无内容时隐藏二维码
+                qrcodeDiv.classList.remove('show');
+                qrcodeDiv.innerHTML = '';
+            }
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('qrcode').classList.remove('show');
+        });
     </script>
 </body>
 </html>`;

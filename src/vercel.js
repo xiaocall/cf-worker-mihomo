@@ -14,20 +14,25 @@ export default async function handler(req, res) {
         mihomo: url.searchParams.get('mihomo') === 'true',
         v2ray: url.searchParams.get('v2ray') === 'true',
         udp: url.searchParams.get('udp') === 'true',
+        udp_fragment: url.searchParams.get('udp_frag') === 'true',
+        tls_fragment: url.searchParams.get('tls_frag') === 'true',
         exclude_package: url.searchParams.get('ep') === 'true',
         exclude_address: url.searchParams.get('ea') === 'true',
         tailscale: url.searchParams.get('tailscale') === 'true',
+        adgdns: url.searchParams.get('adgdns') === 'true',
+        tun: url.searchParams.get('tun') === 'true',
         IMG: process.env.IMG || utils.backimg,
         sub: process.env.SUB || utils.subapi,
         Mihomo_default: process.env.MIHOMOTOP || utils.mihomo_top,
         singbox_1_11: process.env.SINGBOX_1_11 || utils.singbox_1_11,
         singbox_1_12: process.env.SINGBOX_1_12 || utils.singbox_1_12,
         singbox_1_12_alpha: process.env.SINGBOX_1_12_ALPHA || utils.singbox_1_12_alpha,
+        singbox_1_13: process.env.SINGBOX_1_13 || utils.singbox_1_13,
         beian: process.env.BEIAN || utils.beiantext,
         beianurl: process.env.BEIANURL || utils.beiandizi,
         configs: utils.configs(process.env.MIHOMO, process.env.SINGBOX),
-        modes: utils.modes(process.env.SUB || utils.subapi, req.headers['user-agent']),
     };
+    e.modes = utils.modes(e.sub, e.userAgent);
     if (e.urls.length === 1 && e.urls[0].includes(',')) {
         e.urls = e.urls[0].split(',').map((u) => u.trim());
     }
@@ -47,7 +52,7 @@ export default async function handler(req, res) {
         } else if (e.mihomo) {
             result = await getmihomo_config(e);
         } else if (e.v2ray) {
-            res = await getv2ray_config(e);
+            result = await getv2ray_config(e);
         }
 
         const rawHeaders = result.headers;

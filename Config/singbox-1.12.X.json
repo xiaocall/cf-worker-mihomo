@@ -5,28 +5,6 @@
         "output": "./singbox.log",
         "timestamp": false
     },
-    "experimental": {
-        "clash_api": {
-            "external_controller": "0.0.0.0:20123",
-            "external_ui": "ui",
-            "secret": "",
-            "default_mode": "rule",
-            "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
-            "external_ui_download_detour": "🎯 全球直连",
-            "access_control_allow_origin": [
-                "*"
-            ],
-            "access_control_allow_private_network": true
-        },
-        "cache_file": {
-            "enabled": true,
-            "path": "cache.db",
-            "cache_id": "",
-            "store_fakeip": true,
-            "store_rdrc": true,
-            "rdrc_timeout": "1d"
-        }
-    },
     "dns": {
         "servers": [
             {
@@ -60,10 +38,10 @@
                 "type": "local"
             },
             {
-                "type": "https",
+                "type": "quic",
                 "tag": "DIRECT-DNS",
                 "detour": "🎯 全球直连",
-                "server_port": 443,
+                "server_port": 853,
                 "server": "dns.alidns.com",
                 "domain_resolver": "local"
             },
@@ -195,27 +173,47 @@
                 "outbound": "🚀 节点选择"
             },
             {
-                "action": "route-options",
-                "udp_disable_domain_unmapping": true,
-                "udp_connect": true,
-                "udp_timeout": "5m"
+                "action": "route-options"
             }
         ],
         "rule_set": [
             {
                 "tag": "private_domain",
                 "type": "remote",
-                "url": "https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
+                "url": "https://jsd.onmicrosoft.cn/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
                 "format": "binary",
                 "download_detour": "🎯 全球直连"
             },
             {
                 "tag": "cn_domain",
                 "type": "remote",
-                "url": "https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
+                "url": "https://jsd.onmicrosoft.cn/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
                 "format": "binary",
                 "download_detour": "🎯 全球直连"
             }
         ]
+    },
+    "services": [],
+    "experimental": {
+        "clash_api": {
+            "external_controller": "0.0.0.0:20123",
+            "external_ui": "ui",
+            "secret": "",
+            "default_mode": "rule",
+            "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+            "external_ui_download_detour": "🎯 全球直连",
+            "access_control_allow_origin": [
+                "*"
+            ],
+            "access_control_allow_private_network": true
+        },
+        "cache_file": {
+            "enabled": true,
+            "path": "cache.db",
+            "cache_id": "",
+            "store_fakeip": true,
+            "store_rdrc": true,
+            "rdrc_timeout": "1d"
+        }
     }
 }
