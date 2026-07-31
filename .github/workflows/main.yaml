@@ -76,7 +76,6 @@ jobs:
                   git push origin main
 
                   git tag "$TAG"
-                  git push origin "$TAG"
 
                   echo "pushed=true" >> "$GITHUB_OUTPUT"
 
@@ -107,6 +106,7 @@ jobs:
                   bash .github/release.sh
 
             - name: Release
+              if: steps.update.outputs.pushed == 'true' || github.ref_type == 'tag'
               uses: softprops/action-gh-release@v3
               with:
                   token: ${{ secrets.GITHUB_TOKEN  }}

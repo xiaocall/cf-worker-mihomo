@@ -18,7 +18,8 @@ import { ConfigLatest, ConfigPre } from '../../config/singbox.js';
  */
 function Verbose(e) {
     const ua = e.userAgent;
-    e.ispre = /1\.14\.0-alpha\.\d+/.test(ua);
+    e.ispre = /1\.14\.0-(?:alpha|beta)\.\d+/.test(ua);
+
     if (e.checkUA && !/singbox|sing-box|sfa|sfm/i.test(ua)) {
         throw new Error('不支持的客户端');
     }
